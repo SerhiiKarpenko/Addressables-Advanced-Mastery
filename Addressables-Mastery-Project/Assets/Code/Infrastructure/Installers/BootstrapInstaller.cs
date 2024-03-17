@@ -42,8 +42,6 @@ namespace Code.Infrastructure.Installers
       Container.Bind<ISceneLoader>().To<SceneLoader>().AsSingle();
       Container.Bind<ITimeService>().To<UnityTimeService>().AsSingle(); 
       Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle(); 
-      Container.Bind<IAssetDownloadReporter>().To<AssetDownloadReporter>().AsSingle(); 
-      Container.Bind<IAssetDownloadService>().To<LabeledAssetDownloadService>().AsSingle(); 
     }
 
     private void BindGameplayServices()

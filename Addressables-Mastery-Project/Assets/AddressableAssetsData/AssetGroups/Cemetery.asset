@@ -20,14 +20,12 @@ MonoBehaviour:
   - m_GUID: eed36e4b4f3913e4d899776ff49ce594
     m_Address: Cemetery
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - remote
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bb7957e932cdb98499356e92ebb2ceda
     m_Address: Cemetery
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - remote
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 24261659411d25b4a875f353f307cdab, type: 2}

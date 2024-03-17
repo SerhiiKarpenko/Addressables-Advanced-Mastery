@@ -49,8 +49,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eac3472ba734ec94781a3cea6aabc419, type: 2}
   - {fileID: 11400000, guid: fd0c9350d44593d4bbda58293a0cb9b2, type: 2}
   - {fileID: 11400000, guid: e6cfe1a16c5d70d48b93b9f44e34d3a6, type: 2}
-  - {fileID: 11400000, guid: 3cbcc5bcc0a9b8e4088f94d04e02754e, type: 2}
-  - {fileID: 11400000, guid: 262b23cd0a516bc41b34303f4cdd0770, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -92,7 +90,6 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - remote
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: ece3f8baec4d52549acd8e262542b722, type: 2}
@@ -105,7 +102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9b8037c60dff4f488134ee7a428a90a, type: 2}
   - {fileID: 11400000, guid: 5928c4cf033738840bc587fc856332ef, type: 2}
   - {fileID: 11400000, guid: 0afa23a7764bb1046b49c09c187cfe4e, type: 2}
-  - {fileID: 11400000, guid: 20d4e970f2bc8fe438ebb765d17c74a2, type: 2}
+  - {fileID: 11400000, guid: 35336d36591dbbb499655b338a629250, type: 2}
   m_ActiveProfileId: fc23b41f8593f7b4f88d95f22d52554c
   m_HostingServicesManager:
     m_HostingServiceInfos:
@@ -115,7 +112,7 @@ MonoBehaviour:
         m_SerializedData:
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Int32
-          m_Data: 54135
+          m_Data: 52532
           m_Key: HostingServicePort
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Int32
@@ -127,7 +124,7 @@ MonoBehaviour:
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
-          m_Data: False
+          m_Data: True
           m_Key: IsEnabled
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String

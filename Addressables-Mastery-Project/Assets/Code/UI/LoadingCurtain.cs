@@ -1,7 +1,4 @@
-﻿using System;
-using Code.Infrastructure.AssetManagement;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
 namespace Code.UI
 {
@@ -9,19 +6,7 @@ namespace Code.UI
   {
     public Canvas Canvas;
     public DownloadBar DownloadBar;
-    private IAssetDownloadReporter _downloadReporter;
-
-    [Inject]
-    private void Construct(IAssetDownloadReporter downloadReporter)
-    {
-      _downloadReporter = downloadReporter;
-    }
-
-    private void Awake()
-    {
-      _downloadReporter.ProgressUpdated += DisplayDownloadProgress;
-    }
-
+    
     public void Show()
     {
       Canvas.enabled = true;
@@ -31,17 +16,6 @@ namespace Code.UI
     {
       Canvas.enabled = false;
       DownloadBar.gameObject.SetActive(false);
-    }
-
-    private void DisplayDownloadProgress()
-    {
-      DownloadBar.gameObject.SetActive(true);
-      DownloadBar.SetProgress(_downloadReporter.Progress);
-    }
-
-    private void OnDestroy()
-    {
-      _downloadReporter.ProgressUpdated -= DisplayDownloadProgress;
     }
   }
 }
