@@ -27,7 +27,7 @@ namespace Code.Infrastructure.AssetManagement
         
         public async UniTask InitializeDownloadDataAsync()
         {
-            await Addressables.InitializeAsync();
+            await Addressables.InitializeAsync().ToUniTask();
             await UpdateCatalogsAsync();
             await UpdateDownloadSizeAsync();
         }
