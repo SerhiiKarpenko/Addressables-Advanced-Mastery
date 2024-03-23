@@ -49,7 +49,15 @@ namespace Code.Infrastructure.AssetManagement
                 return;
             }
 
-            await DownloadContentWithPreciseProgress(locations);
+            try
+            {
+                await DownloadContentWithPreciseProgress(locations);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+
         }
 
         /// <summary>
