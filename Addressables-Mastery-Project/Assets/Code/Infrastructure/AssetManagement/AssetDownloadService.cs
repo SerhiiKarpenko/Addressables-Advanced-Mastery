@@ -62,7 +62,7 @@ namespace Code.Infrastructure.AssetManagement
         private async UniTask DownloadContent(IList<IResourceLocation> locations)
         {
             UniTask downloadTask = Addressables
-                .DownloadDependenciesAsync(locations)
+                .DownloadDependenciesAsync(locations, autoReleaseHandle: true)
                 .ToUniTask(_assetDownloadReported);
 
             await downloadTask;
@@ -95,6 +95,11 @@ namespace Code.Infrastructure.AssetManagement
             if (downloadHandle.Status == AsyncOperationStatus.Failed)
             {
                 Debug.LogError("Error while downloading catalog dependencies");
+            }
+
+            if (downloadHandle.IsValid())
+            {
+                Addressables.Release(downloadHandle);
             }
             
             _assetDownloadReported.Reset();
