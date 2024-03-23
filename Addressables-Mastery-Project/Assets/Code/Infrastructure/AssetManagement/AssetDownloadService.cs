@@ -1,19 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Code.Extensions;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
+using Zenject;
 
 namespace Code.Infrastructure.AssetManagement
 {
-    public class AssetDownloadService 
+    public class AssetDownloadService : IAssetDownloadService
     {
         private List<IResourceLocator> _catalogLocators;
         private long _downloadSize;
+        
+        private readonly IAssetDownloadReported _assetDownloadReported;
 
+        [Inject]
+        public AssetDownloadService(IAssetDownloadReported assetDownloadReported)
+        {
+            _assetDownloadReported = assetDownloadReported;
+        }
+        
         public async UniTask InitializeDownloadDataAsync()
         {
             await Addressables.InitializeAsync();
@@ -38,16 +49,60 @@ namespace Code.Infrastructure.AssetManagement
                 return;
             }
 
-            await DownloadContent(locations);
-        }
-
-        private async UniTask DownloadContent(IList<IResourceLocation> locations)
-        {
-            Addressables.DownloadDependenciesAsync(locations).ToUniTask();
+            await DownloadContentWithPreciseProgress(locations);
         }
 
         /// <summary>
-        /// Updated catalogs, if there is something to updated cache it and update. 
+        /// First version of downloading content and reporting download progress
+        /// 
+        /// Notice: problem here is our progress and unitask, because Addressables gives us PercentComplete
+        /// But percent Complete is ALL PROGRESS: loading to memory etc. It's not necessary for us.  
+        /// </summary>
+        /// <param name="locations"></param>
+        private async UniTask DownloadContent(IList<IResourceLocation> locations)
+        {
+            UniTask downloadTask = Addressables
+                .DownloadDependenciesAsync(locations)
+                .ToUniTask(_assetDownloadReported);
+
+            await downloadTask;
+            
+            if (downloadTask.Status.IsFaulted())
+            {
+                Debug.LogError("Error while downloading catalog dependencies");
+            }
+
+            _assetDownloadReported.Reset();
+        }
+        
+        /// <summary>
+        /// First version of downloading content and reporting download progress,
+        /// but now with precise progress.
+        /// </summary>
+        /// <param name="locations"></param>
+        private async UniTask DownloadContentWithPreciseProgress(IList<IResourceLocation> locations)
+        {
+            AsyncOperationHandle downloadHandle = Addressables.DownloadDependenciesAsync(locations);
+            
+            while (!downloadHandle.IsDone && downloadHandle.IsValid())
+            {
+                await UniTask.Delay(100);
+                _assetDownloadReported.Report(downloadHandle.GetDownloadStatus().Percent);
+            }
+            
+            _assetDownloadReported.Report(1);
+            
+            if (downloadHandle.Status == AsyncOperationStatus.Failed)
+            {
+                Debug.LogError("Error while downloading catalog dependencies");
+            }
+            
+            _assetDownloadReported.Reset();
+        }
+
+        /// <summary>
+        /// Updated catalogs, if there is something to updated cache it and update.
+        /// Find catalogs that needs to be updated and update them, then cache all updated catalogs. 
         /// </summary>
         private async UniTask UpdateCatalogsAsync()
         {
