@@ -32,7 +32,7 @@ namespace Code.Infrastructure.Installers
     }
 
     private void BindCameraService()
-    {
+    { 
       Container.Bind<ICameraProvider>().To<CameraProvider>().AsSingle();
     }
 

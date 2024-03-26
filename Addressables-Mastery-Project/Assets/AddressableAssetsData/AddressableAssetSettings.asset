@@ -90,6 +90,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - remote
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: ece3f8baec4d52549acd8e262542b722, type: 2}
@@ -102,7 +103,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9b8037c60dff4f488134ee7a428a90a, type: 2}
   - {fileID: 11400000, guid: 5928c4cf033738840bc587fc856332ef, type: 2}
   - {fileID: 11400000, guid: 0afa23a7764bb1046b49c09c187cfe4e, type: 2}
-  - {fileID: 11400000, guid: 35336d36591dbbb499655b338a629250, type: 2}
+  - {fileID: 11400000, guid: 788697da12fe90f47b2603c5e5516fff, type: 2}
   m_ActiveProfileId: fc23b41f8593f7b4f88d95f22d52554c
   m_HostingServicesManager:
     m_HostingServiceInfos:
